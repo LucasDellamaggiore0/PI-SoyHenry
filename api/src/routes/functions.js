@@ -20,6 +20,25 @@ function mainRouteInformation(apiGame){
     return mainRoute;
 }
 
+async function gameDetailApi(idGameApi){
+    let gameMatchId = [];
+    var gameId = await axios.get(`https://api.rawg.io/api/games/${idGameApi}?key=${API_KEY}`)
+        .then(r => {
+            gameMatchId = [r.data]
+        })
+    return gameMatchId;
+}
+
+async function gameDetailDB(idGameDB){
+    let dataDB = await Videogame.findByPk(idGameDB, {
+        include: Genero
+    })
+    return dataDB;
+}
+
+
+
+
 /* https://api.rawg.io/api/games?search={portal}&key=3ed60c1cc25f4ef3aaa68155a5b08680 */
 async function requestApi(){
     let allData = [];
@@ -71,11 +90,44 @@ function dataBaseXApi(api, db){
 }
 
 
+function gameDetails(gameDetail){
+    let detailRoute = gameDetail.map(d =>{
+        return {
+            name: d.name,
+            img: d.background_image,
+            description: d.description,
+            released: d.released,
+            rating: d.rating,
+            platforms: d.platforms.map(p=>{
+                return platforms = p.platform.name
+            }),
+            genres: d.genres.map(g=>{
+                return genres = g.name
+            })
+        }
+    })
+    return detailRoute;
+}
+
+function validate(id){
+    if(typeof id === 'string'){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+
 module.exports = {
     dataBaseXApi,
     searchApi,
     SearchNameDB,
     requestDB,
     requestApi,
-    mainRouteInformation
+    mainRouteInformation,
+    gameDetailApi,
+    gameDetailDB,
+    gameDetails,
+    validate
 }
