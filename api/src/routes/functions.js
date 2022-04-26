@@ -36,7 +36,19 @@ async function gameDetailDB(idGameDB){
     return dataDB;
 }
 
-
+async function requestGenresApi(){
+    let genres = [];
+    var gameGenresApi = await axios.get(`https://api.rawg.io/api/genres?key=${API_KEY}`)
+        .then(g => {
+            genres = [...genres,...g.data.results]
+        })
+    return genres;
+}
+async function requestGenresDB(){
+    let dataDB = await Genero.findAll(
+    )
+    return dataDB;
+}
 
 
 /* https://api.rawg.io/api/games?search={portal}&key=3ed60c1cc25f4ef3aaa68155a5b08680 */
@@ -118,6 +130,16 @@ function validate(id){
     }
 }
 
+function genresInfo(genres){
+    let genresData = genres.map(g =>{
+        return{
+            id: g.id,
+            name: g.name
+        }
+    })
+    return genresData;
+}
+
 
 module.exports = {
     dataBaseXApi,
@@ -129,5 +151,8 @@ module.exports = {
     gameDetailApi,
     gameDetailDB,
     gameDetails,
-    validate
+    validate,
+    requestGenresApi,
+    requestGenresDB,
+    genresInfo
 }

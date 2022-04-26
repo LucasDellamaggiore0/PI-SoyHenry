@@ -5,7 +5,7 @@ const {gameDetailApi, gameDetailDB ,gameDetails, validate} = require('./function
 
 // https://api.rawg.io/api/games/91069?key=3ed60c1cc25f4ef3aaa68155a5b08680
 
-router.get('/:idgame', async (req,res,next)=>{
+/* router.get('/:idgame', async (req,res,next)=>{
     const {idgame} = req.params
     try {
         if(!validate(idgame)){
@@ -18,6 +18,6 @@ router.get('/:idgame', async (req,res,next)=>{
     } catch (error) {
         next(error)
     }
-})
+}) */
 
 module.exports = router;
