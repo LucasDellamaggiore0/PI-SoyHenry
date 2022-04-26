@@ -2,7 +2,7 @@ require('dotenv').config();
 const axios = require('axios').default;
 const {Op} = require('sequelize')
 const {API_KEY} = process.env;
-const {Videogame, Genero} = require('../db')
+const {Videogame, Genres} = require('../db')
 
 
 function mainRouteInformation(apiGame){
@@ -10,11 +10,7 @@ function mainRouteInformation(apiGame){
         return {
             name: e.name,
             img: e.background_image,
-            genders: e.genres.map(g =>{
-                return {
-                    name : g.name
-                }
-            })
+            genders: e.genres
         }
     })
     return mainRoute;
@@ -31,7 +27,7 @@ async function gameDetailApi(idGameApi){
 
 async function gameDetailDB(idGameDB){
     let dataDB = await Videogame.findByPk(idGameDB, {
-        include: Genero
+        include: Genres
     })
     return dataDB;
 }
@@ -45,7 +41,7 @@ async function requestGenresApi(){
     return genres;
 }
 async function requestGenresDB(){
-    let dataDB = await Genero.findAll(
+    let dataDB = await Genres.findAll(
     )
     return dataDB;
 }
@@ -59,7 +55,20 @@ async function requestApi(){
             .then(r => {
                 allData = [...allData,...r.data.results]
             })
-    } 
+    }
+    let allGenres = await requestGenresDB()
+        if(allGenres.length === 0){
+            var arrayG = [];
+            let genresA = await requestGenresApi()
+            genresA.map(g=>{
+                arrayG.push({
+                    id: g.id,
+                    name: g.name
+                })
+            })
+            var genresInDB = await Genres.bulkCreate(arrayG)
+            
+        }
     /* console.log(1, allData.length); */
     /* console.log(1, allData) */
     return allData;
@@ -67,7 +76,15 @@ async function requestApi(){
 
 async function requestDB(){
     let dataDB = await Videogame.findAll({
-        include: Genero
+        include:[
+                {
+                    model: Genres,
+                    attributes: ["name"],
+                    through: {
+                        attributes: []
+                    }
+                }
+            ]
     })
     return dataDB;
 }
@@ -154,5 +171,5 @@ module.exports = {
     validate,
     requestGenresApi,
     requestGenresDB,
-    genresInfo
+    genresInfo,
 }
