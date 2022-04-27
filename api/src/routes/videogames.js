@@ -8,7 +8,6 @@ router.get('/', async (req,res,next)=>{
     const {name} = req.query
     
     try {
-        
         if(!name){
             var requestA = await requestApi()
             var requestB = await  requestDB()

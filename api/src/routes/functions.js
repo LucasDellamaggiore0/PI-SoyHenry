@@ -10,7 +10,9 @@ function mainRouteInformation(apiGame){
         return {
             name: e.name,
             img: e.background_image,
-            genders: e.genres
+            genres: e.genres.map(g=>{
+                return g.name
+            })
         }
     })
     return mainRoute;

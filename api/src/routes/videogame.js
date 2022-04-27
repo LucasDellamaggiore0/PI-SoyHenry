@@ -31,9 +31,10 @@ router.post('/',async (req,res,next)=>{
             released,
             rating,
             platforms,
+            genres
         })
         let genresMatch = await Genres.findAll({
-            where:{name : [...genres]}
+            where:{name : [genres]}
         })
 
         await videogameCreate.setGenres(genresMatch)
