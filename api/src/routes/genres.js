@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const router = express.Router();
-const {Genero, Videogame} = require('../db')
+const {Genres, Videogame} = require('../db')
 const {requestGenresApi,requestGenresDB, genresInfo} = require('./functions')
 // https://api.rawg.io/api/genres?key=${API_KEY}
 
@@ -18,7 +18,7 @@ router.get('/', async(req,res,next)=>{
                     name: g.name
                 })
             })
-            var genresInDB = await Genero.bulkCreate(arrayG)
+            var genresInDB = await Genres.bulkCreate(arrayG)
             res.send(genresInfo(genresInDB))
         }else{
             res.send(allGenres)

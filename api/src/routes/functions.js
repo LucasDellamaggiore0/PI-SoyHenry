@@ -109,6 +109,7 @@ async function searchApi(name){
                 gamesMatch = [...gamesMatch, ...r.data.results]
             })
     }
+    console.log(2, gamesMatch)
     return gamesMatch;
 }
 
@@ -133,7 +134,7 @@ function gameDetails(gameDetail){
                 return platforms = p.platform.name
             }),
             genres: d.genres.map(g=>{
-                return genres = g.name
+                return g.name
             })
         }
     })

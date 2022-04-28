@@ -6,7 +6,7 @@ const {requestApi, requestDB, searchApi, SearchNameDB, dataBaseXApi, mainRouteIn
 
 router.get('/', async (req,res,next)=>{
     const {name} = req.query
-    
+    console.log(1, name)
     try {
         if(!name){
             var requestA = await requestApi()
@@ -21,12 +21,13 @@ router.get('/', async (req,res,next)=>{
             var responseSearchDB = await SearchNameDB(name)
             var responseMatch = dataBaseXApi(responseSearchApi,responseSearchDB )
             if(responseMatch.length === 0){
-                res.status(404).send('No hay juegos con el nombre recibido')
+                res.json(responseMatch)
             }
             else{
                 res.send(mainRouteInformation(responseMatch.slice(0,15)));
             }
         }
+
     } catch (error) {
         next(error);
     }
