@@ -2,6 +2,7 @@ export const GET_ALL_GAMES = 'GET_ALL_GAMES'
 export const CREATE_GAME = 'CREATE_GAME'
 export const GET_GENRES = 'GET_GENRES'
 export const GET_GAME_ID = 'GET_GAME_ID'
+export const RESET = 'RESET'
 
 export const getAllGames = () =>async dispatch =>{
     const response = await fetch('http://localhost:3001/videogames')
@@ -20,9 +21,9 @@ export const getGameTitle = (title) => async dispatch =>{
 }
 
 export const getGameById = (id) => async dispatch =>{
-    return fetch(`http://localhost:3001/videogame/${id}`)
-        .then(res => res.json)
-        .then(game => dispatch({type: GET_GAME_ID, payload: game}))
+    let r = await fetch(`http://localhost:3001/videogame/${id}`)
+    let gameId = await r.json()
+    return dispatch({type: GET_GAME_ID, payload: gameId})
 }
 
 export const getGenres = () => async dispatch =>{
@@ -34,4 +35,8 @@ export const getGenres = () => async dispatch =>{
 
 export const createGame = (values) => {
     return {type: CREATE_GAME, payload: values}
+}
+
+export const reset = ()=>{
+    return {type: RESET, payload: []}
 }

@@ -17,7 +17,7 @@ const GameContainer = () => {
         <div className='games-container'>
             {
                 allVideogames.games.map(el =>{
-                    return <GameCard name={el.name} img={el.img} genres={el.genres}/>
+                    return <GameCard id={el.id} name={el.name} img={el.img} genres={el.genres}/>
                 })
             }
         </div>

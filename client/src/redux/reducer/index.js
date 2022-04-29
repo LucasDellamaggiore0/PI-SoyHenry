@@ -1,4 +1,4 @@
-import {GET_ALL_GAMES, CREATE_GAME, GET_GENRES, GET_GAME_ID} from '../actions/index'
+import {GET_ALL_GAMES, CREATE_GAME, GET_GENRES, GET_GAME_ID, RESET} from '../actions/index'
 
 const initialState = {
     games: [],
@@ -17,7 +17,7 @@ const reducer = (state = initialState, action) => {
         case GET_GAME_ID:
             return {
                 ...state,
-                game: [...state.game, action.payload]
+                game: [...action.payload]
             }
         case GET_GENRES:
             return {
@@ -28,6 +28,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 gameCreated: [...state.gameCreated, action.payload]
+            }
+        case RESET:
+            return{
+                ...state,
+                game: action.payload
             }
         default:
             return state;

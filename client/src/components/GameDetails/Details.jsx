@@ -1,9 +1,9 @@
 import React from "react";
-
-export default function LandingPage(){
+import GameDetailContainer from './GameDetailCointainer'
+export default function Details(props){
     return(
         <div>
-            <h1>Details</h1>
+            <GameDetailContainer/>
         </div>
     )
 }

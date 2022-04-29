@@ -1,19 +1,19 @@
-
 const express = require('express');
 const router = express.Router();
-const {requestApi, requestDB, searchApi, SearchNameDB, dataBaseXApi, mainRouteInformation, mainRouteInfo} = require('./functions')
+const {requestDB, searchApi, SearchNameDB, dataBaseXApi, mainRouteInformation, requestApi2} = require('./functions')
 
 
 router.get('/', async (req,res,next)=>{
     const {name} = req.query
     console.log(1, name)
     try {
+        
         if(!name){
-            var requestA = await requestApi()
+            var requestA = await requestApi2()
             var requestB = await  requestDB()
             /* var requestBModified = mainRouteInfo(requestB) */
             var response = dataBaseXApi(requestA, requestB)
-            res.send(mainRouteInformation(response)); 
+            res.send(response); 
             /* res.send(requestB) */
         }
         else{
