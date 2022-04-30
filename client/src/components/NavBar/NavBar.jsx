@@ -3,7 +3,7 @@ import React from 'react'
 
 const NavBar = () => {
     return (
-        <div>
+        <div className="navbar--container">
             <SearchBar/>
         </div>
 )

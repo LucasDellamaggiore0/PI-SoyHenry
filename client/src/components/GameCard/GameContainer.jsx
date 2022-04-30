@@ -14,7 +14,7 @@ const GameContainer = () => {
         dispatch(getAllGames())
     }, [])
     return (
-        <div className='games-container'>
+        <div className='games--container'>
             {
                 allVideogames.games.map(el =>{
                     return <GameCard id={el.id} name={el.name} img={el.img} genres={el.genres}/>

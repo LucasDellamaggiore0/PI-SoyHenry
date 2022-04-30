@@ -1,0 +1,68 @@
+
+//! PAGINA PRINCIPAL
+.home--container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    
+}
+
+//! NAVBAR
+
+.navbar--container{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    width: 100%;
+    height: 5rem;
+    background-color: lightblue;
+    .searchbar{
+        height: 1.5rem;
+        width: 30rem;
+        margin-right: 1.5rem;
+        border-radius: .2rem;
+    }
+    .searchbar__btn{
+        height: 1.7rem;
+        margin-right: 2rem;
+        border: 1px solid black;
+        border-radius: .2rem;
+        padding: .2rem;
+
+    }
+}
+
+
+
+.games--container{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: max-content;
+    margin-top: 2rem;
+}
+
+
+.game--content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+    .gamecontent__img{
+        width: 500px;
+        height:300px;
+    }
+    .game--content__title{
+        text-decoration: none;
+        color: black;
+    }
+    span{
+        color: black;
+        font: bold;
+        font-size: large;
+    }
+}
+

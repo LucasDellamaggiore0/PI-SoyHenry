@@ -1,8 +1,8 @@
 import React from 'react'
-// import { useEffect } from 'react'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {getGameTitle} from '../../redux/actions/index'
+import '../../scss/_home.scss'
 
 export default function SearchBar(){
   
@@ -29,12 +29,12 @@ export default function SearchBar(){
   }
 
   return (
-      <div>
+      <>
         <form onSubmit={handleSubmit}>
           {games.length === 0 && error && <span>No se encontraron juegos con el nombre ingresado</span>}
-          <input type="text" placeholder='Game...' onChange={handleChange} value={search}/>
-          <button type="submit">Search</button>
+          <input className="searchbar" type="text" placeholder='Game...' onChange={handleChange} value={search}/>
+          <button className='searchbar__btn' type="submit">Search</button>
         </form>
-      </div>
+      </>
     )
 }

@@ -4,7 +4,7 @@ import NavBar from "../NavBar/NavBar";
 
 export default function Home(){
     return(
-        <div className="games-container">
+        <div className="home--container">
             <NavBar/>
             <GameContainer/>
         </div>
