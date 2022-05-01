@@ -43,7 +43,7 @@ const reducer = (state = initialState, action) => {
                 case 'A-Z':
                     return{
                         ...state,
-                        gamesFiltered : [...state.gamesFiltered].sort((a,b)=>{
+                        gamesFiltered : [...state.games].sort((a,b)=>{
                             return a.name > b.name ? 1 : b.name > a.name ? -1 : 0
                         }),
                         orderedGames : action.payload
@@ -51,7 +51,7 @@ const reducer = (state = initialState, action) => {
                 case 'Z-A':
                     return{
                         ...state,
-                        gamesFiltered : [...state.gamesFiltered].sort((a,b)=>{
+                        gamesFiltered : [...state.games].sort((a,b)=>{
                             return (a.name < b.name ? 1 : b.name < a.name ? -1 : 0)
                         }),
                         orderedGames : action.payload
@@ -59,7 +59,7 @@ const reducer = (state = initialState, action) => {
                 case 'AS':
                     return{
                         ...state,
-                        gamesFiltered : [...state.gamesFiltered].sort((a,b)=>{
+                        gamesFiltered : [...state.games].sort((a,b)=>{
                             return a.rating < b.rating ? 1 : b.rating < a.rating ? -1 : 0
                         }),
                         orderedGames : action.payload
@@ -67,7 +67,7 @@ const reducer = (state = initialState, action) => {
                 case 'DES':
                     return{
                         ...state,
-                        gamesFiltered : [...state.gamesFiltered].sort((a,b)=>{
+                        gamesFiltered : [...state.games].sort((a,b)=>{
                             return a.rating > b.rating ? 1 : b.rating > a.rating ? -1 : 0
                         }),
                         orderedGames : action.payload

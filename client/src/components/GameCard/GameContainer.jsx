@@ -24,6 +24,9 @@ const GameContainer = () => {
         }else{
             setCardsGames(gamesFiltered)
         }
+        console.log(1, gamesFiltered)
+        console.log(2, games)
+        console.log(3, filteredGames)
     }, [games, gamesFiltered, orderedGames, filteredGames])
     
     return (
