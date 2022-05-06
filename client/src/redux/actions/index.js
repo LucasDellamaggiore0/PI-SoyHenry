@@ -1,9 +1,11 @@
 export const GET_ALL_GAMES = 'GET_ALL_GAMES'
 export const CREATE_GAME = 'CREATE_GAME'
+export const GAMES_ORIGIN = 'GAMES_ORIGIN'
 export const GET_GENRES = 'GET_GENRES'
 export const GET_GAME_ID = 'GET_GAME_ID'
 export const RESET = 'RESET'
-export const ORDER_FILTER = 'ORDER_FILTER'
+export const ORDER_BY_NAME = 'ORDER_BY_NAME'
+export const ORDER_BY_RATING = 'ORDER_BY_RATING'
 export const FILTER_GENRES = 'FILTER_GENRES'
 
 export const getAllGames = () =>async dispatch =>{
@@ -36,17 +38,48 @@ export const getGenres = () => async dispatch =>{
 
 
 export const createGame = (values) => {
-    return {type: CREATE_GAME, payload: values}
+    return (dispatch) =>{
+        fetch('http://localhost:3001/videogame',{
+            body: JSON.stringify(values),
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json'}
+        })
+    }
+}
+
+export const orderByName = (games)=>{
+    return{
+        type: ORDER_BY_NAME,
+        payload: games
+    }
+}
+
+export const orderByRating = (games)=>{
+    return{
+        type: ORDER_BY_RATING,
+        payload: games
+    }
+}
+
+export const gamesDB = ()=>async (dispatch)=>{
+    const gamesDB = await fetch('http://localhost:3001/videogames/gamesDB')
+    const gamesDBMatch = await gamesDB.json()
+    return dispatch({type:GAMES_ORIGIN, payload: gamesDBMatch, origin: 'db'})
+}
+export const gamesAPI = ()=> async(dispatch)=>{
+    const gamesAPI = await fetch('http://localhost:3001/videogames/gamesAPI')
+    const gamesAPIMatch = await gamesAPI.json()
+    return dispatch({type: GAMES_ORIGIN, payload: gamesAPIMatch, origin: 'api'})
+}
+
+
+export const filterGenres = (genres)=> async (dispatch)=>{
+    const response = await fetch(`http://localhost:3001/videogames/genres?genre=${genres}`)
+    const gameByGenres = await response.json()
+    return dispatch({type: FILTER_GENRES, payload: gameByGenres})
 }
 
 export const reset = ()=>{
     return {type: RESET, payload: []}
 }
 
-export const orderBy = (type)=> async dispatch=>{
-    return dispatch({type: ORDER_FILTER, payload: type})
-}
-
-export const filterGenres = (genres)=> async dispatch=>{
-    return dispatch({type: FILTER_GENRES, type: genres})
-}

@@ -13,7 +13,7 @@
 
 .navbar--container{
     display: flex;
-    justify-content: end;
+    justify-content: space-around;
     align-items: center;
     width: 100%;
     height: 5rem;
@@ -30,11 +30,33 @@
         border: 1px solid black;
         border-radius: .2rem;
         padding: .2rem;
-
     }
+    .filters__container{
+        display: flex;
+        justify-items: start;
+    }
+    .orders__container{
+        height: 1rem;
+        width: 15rem;
+        margin-right: 1.5rem;
+        border-radius: .2rem;
+        .orders__box{
+            height: 1.5rem;
+        }
+    }
+    .genres__container{
+        height: 1rem;
+        width: 15rem;
+        margin-right: 1.5rem;
+        border-radius: .2rem;
+        .genres__box{
+            height: 1.5rem;
+        }
+    }
+
 }
 
-
+//! GAMES CONTAINERS
 
 .games--container{
     display: grid;
@@ -63,6 +85,35 @@
         color: black;
         font: bold;
         font-size: large;
+    }
+}
+
+//!GAMES DETAILS CONTAINERS
+
+.games__container--details{
+    display: flex;
+    justify-content: center;
+}
+
+
+
+
+.game__details{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .game__details--img{
+        width: 800px;
+        height:600px;
+    }
+    .game__details--title{
+        text-align: center;
+    }
+    .details__container--game{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin-top: 2rem;
     }
 }
 

@@ -1,8 +1,9 @@
 import React from 'react'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {getGameTitle} from '../../redux/actions/index'
+import {getGameTitle, getGenres} from '../../redux/actions/index'
 import '../../scss/_home.scss'
+import {Link} from 'react-router-dom'
 
 export default function SearchBar(){
   
@@ -16,6 +17,8 @@ export default function SearchBar(){
 
   const handleChange = (e)=>{
     setSearch(e.target.value)
+    // console.log(2, e.target.value)
+    // console.log(1, games)
   }
 
   const handleSubmit = (e)=>{
@@ -24,6 +27,7 @@ export default function SearchBar(){
       return alert('Debes ingresar un juego para realizar la busqueda')
     }else{
         dispatch(getGameTitle(search))
+        dispatch(getGenres())
         setError(true)
     }
   }
@@ -34,6 +38,9 @@ export default function SearchBar(){
           {games.length === 0 && error && <span>No se encontraron juegos con el nombre ingresado</span>}
           <input className="searchbar" type="text" placeholder='Game...' onChange={handleChange} value={search}/>
           <button className='searchbar__btn' type="submit">Search</button>
+          <Link to={'/newgame'}>
+            <button>Create Game</button>
+          </Link>
         </form>
       </>
     )

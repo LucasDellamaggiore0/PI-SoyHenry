@@ -3,40 +3,47 @@ import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect} from 'react'
 import {getAllGames} from '../../redux/actions/index'
+import { Pagination } from '../Pagination/Pagination'
 
 
 
 
 const GameContainer = () => {
-    const {games, gamesFiltered, orderedGames,filteredGames} = useSelector((store) => store)
+    const {games} = useSelector((store) => store)
+    const [posts, setPosts] = useState(games)
+    const [currentPage, setCurrentPage] = useState(1)
+    const [postsPerPage, setPostsPerPage] = useState(15)
     const dispatch = useDispatch();
-    const [cardsGames, setCardsGames] = useState(games)
     
+    const indexOfLastPost = currentPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage
+    const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost)
+
     useEffect(()=>{
-        if(games.length === 0){
             dispatch(getAllGames())
-        }
     }, [])
     
     useEffect(()=>{
-        if(orderedGames === 'ALL' && filteredGames === 'ALL'){
-            setCardsGames(games)
-        }else{
-            setCardsGames(gamesFiltered)
-        }
-        console.log(1, gamesFiltered)
-        console.log(2, games)
-        console.log(3, filteredGames)
-    }, [games, gamesFiltered, orderedGames, filteredGames])
-    
+        setPosts(games)
+        setCurrentPage(1)
+    },[games])
+
+
     return (
+        <>
+            <Pagination 
+                postsPerPage={postsPerPage}
+                allPosts={posts.length}
+                setCurrentPage={setCurrentPage}
+            />
         <div className='games--container'>
             {
-                cardsGames.map(el =>{
-                    return <GameCard id={el.id} name={el.name} img={el.img} genres={el.genres}/>
+                currentPosts.map((games)=>{
+                    return <GameCard id={games.id} name={games.name} img={games.img} genres={games.genres}/>
                 })
             }
         </div>
+        </>
     )
 }
 

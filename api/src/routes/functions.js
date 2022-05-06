@@ -13,7 +13,9 @@ function mainRouteInformation(apiGame){
             img: e.background_image,
             genres: e.genres.map(g=>{
                 return g.name
-            })
+            }),
+            rating: e.rating,
+            released: e.released
         }
     })
     return mainRoute;
@@ -50,42 +52,12 @@ async function requestGenresDB(){
 }
 
 
-/* https://api.rawg.io/api/games?search={portal}&key=3ed60c1cc25f4ef3aaa68155a5b08680 */
-// async function requestApi(){
-//     let allData = [];
-//     for(let i=1; i <=5; i++){
-//         var req = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=${i}`)
-//             .then(r => {
-//                 allData = [...allData,...r.data.results]
-//             })
-//     }
-//     let allGenres = await requestGenresDB()
-//         if(allGenres.length === 0){
-//             var arrayG = [];
-//             let genresA = await requestGenresApi()
-//             genresA.map(g=>{
-//                 arrayG.push({
-//                     id: g.id,
-//                     name: g.name
-//                 })
-//             })
-//             var genresInDB = await Genres.bulkCreate(arrayG)
-            
-//         }
-//     /* console.log(1, allData.length); */
-//     /* console.log(1, allData) */
-//     return allData;
-// }
-
 async function requestDB(){
     let dataDB = await Videogame.findAll({
         include:[
                 {
                     model: Genres,
                     attributes: ["name"],
-                    through: {
-                        attributes: []
-                    }
                 }
             ]
     })
@@ -96,10 +68,31 @@ async function SearchNameDB(name){
     let gameMatchDB = await Videogame.findAll({
         where:{
             name : {[Op.iLike]: `%${name}%`}
-        }
+        },
+        include:[
+                {
+                    model: Genres,
+                    attributes: ["name"],
+                }
+            ]
     })
+    console.log(3, gameMatchDB)
     return gameMatchDB;
 }
+
+async function SearchGameByGenreDB(name){
+    let gameByGenreDB = await Videogame.findAll({
+        include:[
+            {
+                model: Genres,
+                where: {name}
+            }
+        ]
+    })
+    console.log(gameByGenreDB)
+    return gameByGenreDB;
+}
+
 
 
 async function searchApi(name){
@@ -122,27 +115,45 @@ function dataBaseXApi(api, db){
 
 
 function gameDetails(gameDetail){
-    let detailRoute = gameDetail.map(d =>{
-        return {
-            id: d.id,
-            name: d.name,
-            img: d.background_image,
-            description: d.description,
-            released: d.released,
-            rating: d.rating,
-            platforms: d.platforms.map(p=>{
-                return platforms = p.platform.name
-            }),
-            genres: d.genres.map(g=>{
-                return g.name
-            })
-        }
-    })
-    return detailRoute;
+    if(Array.isArray(gameDetail)){
+        let detailRoute = gameDetail.map(d =>{
+            return {
+                id: d.id,
+                name: d.name,
+                img: d.background_image,
+                description: d.description,
+                released: d.released,
+                rating: d.rating,
+                platforms: d.platforms.map(p=>{
+                    return platforms = p.platform.name
+                }),
+                genres: d.genres.map(g=>{
+                    return g.name
+                })
+            }
+        })
+        return detailRoute;
+    }else{
+        return[
+            {
+                id: gameDetail.id,
+                name: gameDetail.name,
+                img: gameDetail.background_image,
+                description: gameDetail.description,
+                released: gameDetail.released,
+                rating: gameDetail.rating,
+                genres: gameDetail.genres.map((g)=>{
+                    return g.name
+                }),
+                platforms: gameDetail.platforms 
+            }
+        ]
+    }
 }
 
 function validate(id){
-    if(typeof id === 'string'){
+    let idChange = Number(id)
+    if(isNaN(idChange)){
         return true;
     }
     else{
@@ -176,7 +187,8 @@ async function requestApi2(){
             img: d.background_image,
             genres: d.genres.map(g=>{
                 return g.name
-            })
+            }),
+            rating: d.rating
         }
     })
     // console.log(fin)
@@ -205,5 +217,6 @@ module.exports = {
     requestGenresApi,
     requestGenresDB,
     genresInfo,
-    requestApi2
+    requestApi2,
+    SearchGameByGenreDB
 }

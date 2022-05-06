@@ -1,14 +1,10 @@
-import {GET_ALL_GAMES, CREATE_GAME, GET_GENRES, GET_GAME_ID, RESET,ORDER_FILTER,
-FILTER_GENRES} from '../actions/index'
+import {GET_ALL_GAMES, CREATE_GAME, GET_GENRES, GET_GAME_ID, RESET,ORDER_BY_NAME, ORDER_BY_RATING, FILTER_GENRES, GAMES_ORIGIN} from '../actions/index'
 
 const initialState = {
     games: [],
     game: [],
     genres: [],
-    gameCreated: [],
-    gamesFiltered: [],
-    orderedGames : 'ALL',
-    filteredGames: 'ALL'
+    gameOrigin: 'all',
 }
 
 const reducer = (state = initialState, action) => {
@@ -38,80 +34,46 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 game: action.payload
             }
-        case ORDER_FILTER:
-            switch(action.payload){
-                case 'A-Z':
-                    return{
-                        ...state,
-                        gamesFiltered : [...state.games].sort((a,b)=>{
-                            return a.name > b.name ? 1 : b.name > a.name ? -1 : 0
-                        }),
-                        orderedGames : action.payload
-                    }
-                case 'Z-A':
-                    return{
-                        ...state,
-                        gamesFiltered : [...state.games].sort((a,b)=>{
-                            return (a.name < b.name ? 1 : b.name < a.name ? -1 : 0)
-                        }),
-                        orderedGames : action.payload
-                    }
-                case 'AS':
-                    return{
-                        ...state,
-                        gamesFiltered : [...state.games].sort((a,b)=>{
-                            return a.rating < b.rating ? 1 : b.rating < a.rating ? -1 : 0
-                        }),
-                        orderedGames : action.payload
-                    }
-                case 'DES':
-                    return{
-                        ...state,
-                        gamesFiltered : [...state.games].sort((a,b)=>{
-                            return a.rating > b.rating ? 1 : b.rating > a.rating ? -1 : 0
-                        }),
-                        orderedGames : action.payload
-                    }
-                case 'GAME_API':
-                    return{
-                        ...state,
-                        gamesFiltered : [...state.games].filter((i)=>{
-                            return typeof i.id === 'number'
-                        }),
-                        orderedGames: action.payload
-                    }
-                case 'GAME_DB':
-                    return{
-                        ...state,
-                        gamesFiltered : [...state.games].filter((i)=>{
-                            return typeof i.id === 'string'
-                        }),
-                        orderedGames: action.payload
-                    }
-                case 'ALL':
-                    return{
-                        ...state,
-                        filteredGames : [...state.games],
-                        orderedGames: action.payload
-                    }
-                default:
-                    return state.games
+        case ORDER_BY_NAME:
+            let all = state.games
+            let sort = action.payload === 'A-Z' ? all.sort((a,b)=>{
+                if(a.name > b.name) return 1
+                if(a.name < b.name) return -1
+                return 0
+            }) : all.sort((a,b)=>{
+                if(a.name > b.name) return -1
+                if(a.name < b.name) return 1
+                return 0
+            })
+            return{
+                ...state,
+                games: sort
+            }
+        case ORDER_BY_RATING:
+            let allGames = state.games
+            let ascDesc = action.payload === 'ASC' ? allGames.sort((a,b)=>{
+                if(a.rating < b.rating) return 1
+                if(a.rating > b.rating) return -1
+                return 0
+            }): allGames.sort((a,b)=>{
+                if(a.rating < b.rating) return -1
+                if(a.rating > b.rating) return 1
+                return 0
+            })
+            return{
+                ...state,
+                games: ascDesc
             }
         case FILTER_GENRES:
-            if(action.payload === 'ALL'){
-                return{
-                    ...state,
-                    filteredGames: state.games,
-                    orderedGames: action.payload
-                }
-            }else{
-                return{
-                    ...state,
-                    filteredGames: state.games.filter((g)=>{
-                        g.genres.includes(action.payload)
-                    }),
-                    orderedGames: action.payload
-                }
+            return{
+                ...state,
+                games: [...action.payload]
+            }
+        case GAMES_ORIGIN:
+            return{
+                ...state,
+                games: action.payload,
+                gameOrigin: action.origin
             }
         default:
             return state;
