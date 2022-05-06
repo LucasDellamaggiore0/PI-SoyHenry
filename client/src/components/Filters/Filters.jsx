@@ -1,23 +1,25 @@
 import {React, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux"
 
-import {filterGenres, getAllGames, getGenres, orderByName, orderByRating, gamesDB, gamesAPI} from "../../redux/actions/index"
+import {filterGenres, getAllGames, getGenres, orderByName, orderByRating, gamesDB, gamesAPI, setLoading} from "../../redux/actions/index"
 
 export default function Filters(){
     const dispatch = useDispatch();
-    const {genres, gameOrigin} = useSelector((store)=> store)
+    const {genres} = useSelector((store)=> store)
     useEffect(()=>{
         dispatch(getGenres())
     },[])
 
     function orderName(e){
         e.preventDefault()
+        if(e.target.value === 'Order by name...') return
         dispatch(orderByName(e.target.value))
         // console.log(e.target.value)
     }
 
     function orderRating(e){
         e.preventDefault()
+        if(e.target.value === 'Order by rating...') return
         dispatch(orderByRating(e.target.value))
         // console.log(e.target.value)
     }
@@ -26,31 +28,40 @@ export default function Filters(){
         e.preventDefault()
         // dispatch(getAllGames())
         if(e.target.value === 'ALL'){
+            dispatch(setLoading())
             dispatch(getAllGames())
         }
-        if(gameOrigin === 'all'){
-            dispatch(filterGenres(e.target.value))
-        }
-        if(gameOrigin === 'db')
-        console.log(e.target.value)
+        dispatch(setLoading())
+        dispatch(filterGenres(e.target.value))
     }
 
     function handleGamesOrigin(e){
         e.preventDefault()
-        if(e.target.value === 'ALL') dispatch(getAllGames())
-        if(e.target.value === 'DB') dispatch(gamesDB())
-        if(e.target.value === 'API') dispatch(gamesAPI())
+        if(e.target.value === 'ALL'){
+            dispatch(setLoading())
+            dispatch(getAllGames())
+        }
+        if(e.target.value === 'DB'){
+            dispatch(setLoading())
+            dispatch(gamesDB())
+        }
+        if(e.target.value === 'API'){ 
+            dispatch(setLoading())
+            dispatch(gamesAPI())
+        }
     }
     
 
     return(
         <div className="filters__container">
             <section className="orders__container">
-                <select className="orderByName" name="orderName" onChange={orderName}>
+                <select className="orderByName" name="orderName" onClick={orderName}>
+                    <option selected="true" disabled="disabled">Order by name...</option>
                     <option value="A-Z">A - Z</option>
                     <option value="Z-A">Z - A</option>
                 </select>
-                <select name="orderRating" onChange={orderRating}>
+                <select name="orderRating" onClick={orderRating}>
+                    <option selected="true" disabled="disabled">Order by rating...</option>
                     <option value="ASC">Mayor rating</option>
                     <option value="DESC">Menor rating</option>
                 </select>

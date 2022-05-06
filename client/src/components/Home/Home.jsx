@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import GameContainer from "../GameCard/GameContainer";
 import NavBar from "../NavBar/NavBar";
 

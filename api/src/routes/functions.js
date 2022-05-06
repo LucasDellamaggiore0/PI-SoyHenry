@@ -106,9 +106,9 @@ async function searchApi(name){
 }
 
 
-function dataBaseXApi(api, db){
-    let allInformation = api.concat(
-        db
+function dataBaseXApi(db, api){
+    let allInformation = db.concat(
+        api
     )
     return allInformation;
 }

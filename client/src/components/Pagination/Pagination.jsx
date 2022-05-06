@@ -1,22 +1,23 @@
 import React from 'react'
 
-export const Pagination = ({postsPerPage, allPosts, setCurrentPage}) => {
-    
+export const Pagination = ({ postsPerPage, allPosts, setCurrentPage }) => {
+
     const pages = []
-    for (let i = 0; i < Math.ceil(allPosts / postsPerPage); i++) {
+    console.log(allPosts.length)
+    for (let i = 1; i <= Math.ceil(allPosts / postsPerPage); i++) {
+        console.log(i)
         pages.push(i)
     }
-    
-    function pagination(number){
+
+    function pagination(number) {
         setCurrentPage(number)
     }
-    
+
     return (
         <div>
             {
-                pages?.map((num)=>{
-                    if(num === 0) return
-                    return <button onClick={()=>pagination(num)}>{num}</button>
+                pages?.map((num) => {
+                    return <button onClick={() => pagination(num)}>{num}</button>
                 })
             }
         </div>

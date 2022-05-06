@@ -23,7 +23,7 @@ router.get('/', async (req,res,next)=>{
             var responseSearchDB = await SearchNameDB(name)
             console.log(1, responseSearchDB)
             console.log(2, mainRouteInformation(responseSearchApi))
-            var responseMatch = dataBaseXApi(responseSearchApi,responseSearchDB)
+            var responseMatch = dataBaseXApi(responseSearchDB,responseSearchApi)
             
             res.send(mainRouteInformation(responseMatch.slice(0,15)));
         }

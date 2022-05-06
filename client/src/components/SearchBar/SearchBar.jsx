@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {getGameTitle, getGenres} from '../../redux/actions/index'
+import {getGameTitle, getGenres, setLoading} from '../../redux/actions/index'
 import '../../scss/_home.scss'
 import {Link} from 'react-router-dom'
 
@@ -28,6 +28,7 @@ export default function SearchBar(){
     }else{
         dispatch(getGameTitle(search))
         dispatch(getGenres())
+        dispatch(setLoading())
         setError(true)
     }
   }

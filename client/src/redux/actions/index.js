@@ -7,18 +7,19 @@ export const RESET = 'RESET'
 export const ORDER_BY_NAME = 'ORDER_BY_NAME'
 export const ORDER_BY_RATING = 'ORDER_BY_RATING'
 export const FILTER_GENRES = 'FILTER_GENRES'
+export const LOADING = 'LOADING'
 
 export const getAllGames = () =>async dispatch =>{
     const response = await fetch('http://localhost:3001/videogames')
     const games = await response.json()
-    return dispatch({type: GET_ALL_GAMES, payload: games})
+    return dispatch({type: GET_ALL_GAMES, payload: games, loader: false})
 }
 
 export const getGameTitle = (title) => async dispatch =>{
     try {
         const res = await  fetch(`http://localhost:3001/videogames?name=${title}`)
         const gamesTitles = await res.json()
-        return dispatch({type:GET_ALL_GAMES, payload:gamesTitles})
+        return dispatch({type:GET_ALL_GAMES, payload:gamesTitles, loader: false })
     } catch (error) {
         console.log(error)
     }
@@ -64,22 +65,25 @@ export const orderByRating = (games)=>{
 export const gamesDB = ()=>async (dispatch)=>{
     const gamesDB = await fetch('http://localhost:3001/videogames/gamesDB')
     const gamesDBMatch = await gamesDB.json()
-    return dispatch({type:GAMES_ORIGIN, payload: gamesDBMatch, origin: 'db'})
+    return dispatch({type:GAMES_ORIGIN, payload: gamesDBMatch, origin: 'db',  loader:false})
 }
 export const gamesAPI = ()=> async(dispatch)=>{
     const gamesAPI = await fetch('http://localhost:3001/videogames/gamesAPI')
     const gamesAPIMatch = await gamesAPI.json()
-    return dispatch({type: GAMES_ORIGIN, payload: gamesAPIMatch, origin: 'api'})
+    return dispatch({type: GAMES_ORIGIN, payload: gamesAPIMatch, origin: 'api', loader:false})
 }
 
 
 export const filterGenres = (genres)=> async (dispatch)=>{
     const response = await fetch(`http://localhost:3001/videogames/genres?genre=${genres}`)
     const gameByGenres = await response.json()
-    return dispatch({type: FILTER_GENRES, payload: gameByGenres})
+    return dispatch({type: FILTER_GENRES, payload: gameByGenres, loader: false})
 }
 
 export const reset = ()=>{
     return {type: RESET, payload: []}
 }
 
+export const setLoading = ()=>{
+    return {type: LOADING, payload: true}
+}

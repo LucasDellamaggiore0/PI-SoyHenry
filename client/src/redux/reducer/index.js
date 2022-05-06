@@ -1,10 +1,11 @@
-import {GET_ALL_GAMES, CREATE_GAME, GET_GENRES, GET_GAME_ID, RESET,ORDER_BY_NAME, ORDER_BY_RATING, FILTER_GENRES, GAMES_ORIGIN} from '../actions/index'
+import {GET_ALL_GAMES, CREATE_GAME, GET_GENRES, GET_GAME_ID, RESET,ORDER_BY_NAME, ORDER_BY_RATING, FILTER_GENRES, GAMES_ORIGIN, LOADING} from '../actions/index'
 
 const initialState = {
     games: [],
     game: [],
     genres: [],
     gameOrigin: 'all',
+    loading: true
 }
 
 const reducer = (state = initialState, action) => {
@@ -12,7 +13,8 @@ const reducer = (state = initialState, action) => {
         case GET_ALL_GAMES:
             return{
                 ...state,
-                games: [...action.payload]
+                games: [...action.payload],
+                loading: action.loader
             }
         case GET_GAME_ID:
             return {
@@ -67,13 +69,20 @@ const reducer = (state = initialState, action) => {
         case FILTER_GENRES:
             return{
                 ...state,
-                games: [...action.payload]
+                games: [...action.payload],
+                loading: action.loader
             }
         case GAMES_ORIGIN:
             return{
                 ...state,
                 games: action.payload,
-                gameOrigin: action.origin
+                gameOrigin: action.origin,
+                loading: action.loader
+            }
+        case LOADING:
+            return{
+                ...state,
+                loading: action.payload
             }
         default:
             return state;
