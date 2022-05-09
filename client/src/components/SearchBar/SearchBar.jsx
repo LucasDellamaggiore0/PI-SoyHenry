@@ -27,22 +27,21 @@ export default function SearchBar(){
       return alert('Debes ingresar un juego para realizar la busqueda')
     }else{
         dispatch(getGameTitle(search))
-        dispatch(getGenres())
         dispatch(setLoading())
         setError(true)
     }
   }
 
   return (
-      <>
+      <div className='searchBar--container'>
         <form onSubmit={handleSubmit}>
-          {games.length === 0 && error && <span>No se encontraron juegos con el nombre ingresado</span>}
-          <input className="searchbar" type="text" placeholder='Game...' onChange={handleChange} value={search}/>
+          {games.length === 0 && error && <span className='alert--msg'>No se encontraron juegos con el nombre ingresado</span>}
+          <input className="searchbar--inpt" type="text" placeholder='Game...' onChange={handleChange} value={search}/>
           <button className='searchbar__btn' type="submit">Search</button>
           <Link to={'/newgame'}>
-            <button>Create Game</button>
+            <button className='newGame--btn'>Create Game</button>
           </Link>
         </form>
-      </>
+      </div>
     )
 }

@@ -22,18 +22,53 @@ p,
 blockquote,
 th,
 td {
-  padding: 0;
-  margin: 0;
-  font-family: "Oswald", sans-serif;
+    padding: 0;
+    margin: 0;
+    font-family: "Oswald", sans-serif;
 }
 ::-webkit-scrollbar {display: none;}
-
-.App{
-  width: 100%;
-  height: 100%;
+fieldset,
+img {
+    border: 0;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+ol,
+ul {
+    list-style: none;
+}
+address,
+caption,
+cite,
+code,
+dfn,
+em,
+strong,
+th,
+var {
+    font-weight: normal;
+    font-style: normal;
+}
+caption,
+th {
+    text-align: left;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: normal;
+}
+abbr,
+acronym {
+    border: 0;
+}
+a {
+    text-decoration: none;
 }
 
-
-
-@import './landingPage';
 @import './home'

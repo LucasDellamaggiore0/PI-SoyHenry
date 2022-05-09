@@ -90,7 +90,7 @@ export default function NewGame(){
                 {error.name && (<p>{error.name}</p>)}
                 <input type="text" name="description" placeholder="Description" onChange={handleChange} value={gameInput.description}/>
                 {error.description && (<p>{error.description}</p>)}
-                <input type="text" name="rating" min={0} max={5} placeholder="Rating..." onChange={handleChange} value={gameInput.rating}/>
+                <input type="text" name="rating" placeholder="Rating..." onChange={handleChange} value={gameInput.rating}/>
                 {error.rating && (<p>{error.rating}</p>)}
                 <input type="text" name="released" placeholder="DD-MM-YYYY"  onChange={handleChange} value={gameInput.released}/>
                 {error.date && (<p>{error.date}</p>)}

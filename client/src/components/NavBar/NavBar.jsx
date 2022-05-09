@@ -1,14 +1,14 @@
-import SearchBar from "../SearchBar/SearchBar"
+
 import React from 'react'
 import Filters from "../Filters/Filters"
-
+import '../../scss/_home.scss'
 
 const NavBar = () => {
     return (
-        <div className="navbar--container">
-            <SearchBar/>
+        <>
+            <p className='title-page'>GAMELAND</p>
             <Filters/>
-        </div>
+        </>
 )
 }
 

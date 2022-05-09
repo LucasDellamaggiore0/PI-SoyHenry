@@ -1,120 +1,259 @@
-
+@import url('https://fonts.googleapis.com/css2?family=MuseoModerno:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 //! PAGINA PRINCIPAL
 .home--container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100vw;
-    
-}
-
-//! NAVBAR
-
-.navbar--container{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width: 100%;
-    height: 8rem;
-    background-color: lightblue;
-    .searchbar{
-        height: 1.5rem;
-        width: 30rem;
-        margin-right: 1.5rem;
-        border-radius: .2rem;
-    }
-    .searchbar__btn{
-        height: 1.7rem;
-        margin-right: 2rem;
-        border: 1px solid black;
-        border-radius: .2rem;
-        padding: .2rem;
-    }
-    .filters__container{
-        display: flex;
-        justify-items: start;
-    }
-    .orders__container{
-        height: 1rem;
-        width: 15rem;
-        margin-right: 1.5rem;
-        border-radius: .2rem;
-        .orders__box{
-            height: 1.5rem;
-        }
-    }
-    .genres__container{
-        height: 1rem;
-        width: 15rem;
-        margin-right: 1.5rem;
-        border-radius: .2rem;
-        .genres__box{
-            height: 1.5rem;
-        }
-    }
-
-}
-
-//! GAMES CONTAINERS
-
-.games--container{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 5px;
-    grid-auto-rows: auto;
-    margin-top: 2rem;
-    justify-content: space-around;
-}
-
-
-.game--content{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid black;
-    .gamecontent__img{
-        width: 500px;
-        height:300px;
-    }
-    .game--content__title{
-        text-decoration: none;
-        color: black;
-    }
-    span{
-        color: black;
-        font: bold;
-        font-size: large;
-    }
-}
-
-//!GAMES DETAILS CONTAINERS
-
-.games__container--details{
-    display: flex;
-    justify-content: center;
-}
-
-
-
-
-.game__details{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    .game__details--img{
-        width: 800px;
-        height:600px;
-    }
-    .game__details--title{
-        text-align: center;
-    }
-    .details__container--game{
+    grid-template-columns: 20% 80%;
+    grid-template-rows: 1fr auto;
+    width: 100vw;
+    height: 100vh;
+    .navbar--container{
+        grid-column: 1/2;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
-        margin-top: 2rem;
+        justify-content: start;
+        max-width: 300px;
+        height: auto;
+        background-color: black;
+        .title-page{
+            color: #A1FC2E;
+            text-align: center;
+            font-family: 'MuseoModerno', cursive;
+            font-size: 2rem;
+        }
+        .filters--container{
+            margin-top: 5rem;
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: center;
+            .filterByGenres{
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                margin-left: 50px;
+                button{
+                    background-color: black;
+                    color: white;
+                    font-size: 16px;
+                    font-family: 'Poppins', sans-serif;
+                    text-align: left;
+                    width: max-content;
+                }
+                button:focus{color: #A1FC2E;}
+                .filterTitle{
+                    color: white;
+                    font-family: 'Poppins', sans-serif;
+                    font-weight: 600;
+                    margin-bottom: 20px;
+                    margin-top: 140px;
+                    width: 70%;
+                    border-bottom: 2px solid #A1FC2E;
+                    font-size: 18px;
+                }
+            }
+            .filterByOrigin{
+                display: flex;
+                flex-direction: column;
+                width: 80%;
+                margin-right: 10px;
+                margin-top: 128px;
+                button{
+                    background-color: black;
+                    color: white;
+                    font-size: 16px;
+                    font-family: 'Poppins', sans-serif;
+                    text-align: left;
+                    width: max-content;
+                }
+                .filterTitle{
+                    color: white;
+                    font-family: 'Poppins', sans-serif;
+                    font-size: 18px;
+                    font-weight: 600;
+                    margin-bottom: 15px;
+                    width: 100%;
+                    border-bottom: 2px solid #A1FC2E;
+                }
+            }
+        }
+        
+    }
+    .container{
+        grid-column: 2/2;
+        background-color: black;
+        width: 100%;
+        .searchBar--container{
+            height: 3rem;
+            width: 100%;
+            margin-right: 2rem;
+            background-color: black;
+            display: flex;
+            justify-content: end;
+            align-items: center;
+            .searchbar--inpt{
+                width: 25rem;
+                height: 1.7rem;
+                border-radius: .4rem;
+                border: none;
+                margin-right: 1rem;
+            }
+            .searchbar__btn{
+                margin-right: 8rem;
+                border-radius: .5rem;
+                height: 2rem;
+                width: 5rem;
+                background-color: #A1FC2E;
+                color: white;
+                font-family: 'Poppins', sans-serif;
+                font-weight: 400;
+                font-size: 16px;
+            }
+            .newGame--btn{
+                background-color: black;
+                border: none;
+                color: white;
+                margin-right: 1rem;
+                font-size: 18px;
+                font-family: 'Poppins', sans-serif;
+            }
+        }
+        .loader-content{
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            .loader-title{
+                background-color: black;
+                width: 100%;
+                color: #A1FC2E;
+                text-align: center;
+                font-size: 32px;
+                font-family: 'Poppins', sans-serif;
+        }
+        
+        }
+        
+        .games--container{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            .orders--container{
+                display: flex;
+                justify-content: start;
+                align-items: center;
+                margin-top: 2rem;
+                .orders--name__container{
+                    margin-right: 2.8rem;
+                    span{
+                        color: white;
+                        font-family: 'Poppins', sans-serif;
+                        font-size: 16px;
+                    }
+                    button{
+                        margin-left: 1rem;
+                        background-color: #1F1F1F;
+                        width: 5rem;
+                        color: #A1FC2E;
+                        font-weight: bold;
+                        font-family: 'Poppins', sans-serif;
+                        font-size: 12px;
+                        }
+                    }
+                .orders--rating__container{
+                        span{
+                            color: white;
+                            font-family: 'Poppins', sans-serif;
+                            font-size: 16px;
+                        }
+                        button{
+                            margin-left: 1rem;
+                            background-color: #1F1F1F;
+                            width: 6rem;
+                            color: #A1FC2E;
+                            font-weight: bold;
+                            font-family: 'Poppins', sans-serif;
+                            font-size: 12px;
+                        }
+                }
+            }
+            
+            .gameCard--container{
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+                .alert--msg{
+                    color: #A1FC2E;
+                    width: 100vw;
+                    height: 100vh;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 32px;
+                    font-family: 'Poppins', sans-serif;
+                }
+                .game--content{
+                    height: 400px;
+                    width: 350px;
+                    border: 1px solid black;
+                    border-radius: .5rem;
+                    margin-top: 3rem;
+                    background-color: #1F1F1F;
+                    display: flex;
+                    flex-direction: column;
+                    .game--content__img{
+                        width: 100%;
+                        height: 300px;
+                    }
+                    .game--content__title{
+                        color: #C6EF24;
+                        text-align: center;
+                        font-family: 'Poppins', sans-serif;
+                        font-size: 20px;
+                        font-weight: 600;
+                    }
+                    .game--content__container{
+                        display: flex;
+                        justify-content: center;
+                        margin-top: 1rem;
+                        .game--content__text{
+                            color: white;
+                            font-family: 'Poppins', sans-serif;
+                            font-weight: 600;
+                            text-align: center;
+                            width: 100%;
+                    }
+                    }
+                    
+                }
+            }
+            .pagination--container{
+                display: flex;
+                justify-content: center;
+                margin-top: 2rem;
+                button{
+                    width: 2.3rem;
+                    height: 2.3rem;
+                    margin-right: .5rem;
+                    background-color: #1F1F1F;
+                    color: #A1FC2E;
+                    font-family: 'Poppins', sans-serif;
+                    font-size: 16px;
+                    font-weight: bold;
+                    border-radius: .5rem;
+                }
+                button:focus{background-color: #A1FC2E; color: black;}
+            }
+            .games--container__subtitle{
+                color: white;
+                margin-top: 4rem;
+                font-family: 'Poppins', sans-serif;
+                font-size: 32px;
+                font-weight: bold;
+                border-bottom: 2px solid #A1FC2E;
+                width: 50%;
+            }
+        }
     }
 }
 
