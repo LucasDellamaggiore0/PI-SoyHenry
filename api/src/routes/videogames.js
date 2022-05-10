@@ -11,18 +11,12 @@ router.get('/', async (req,res,next)=>{
             var requestA = await requestApi2()
             var requestB = await  requestDB()
             var requestBMaped = mainRouteInformation(requestB)
-            
-            //     requestB.genres = requestDBMaped
-            /* var requestBModified = mainRouteInfo(requestB) */
             var response = dataBaseXApi(requestA, requestBMaped)
             res.send(response); 
-            /* res.send(requestB) */
         }
         else{
             var responseSearchApi = await searchApi(name)
             var responseSearchDB = await SearchNameDB(name)
-            console.log(1, responseSearchDB)
-            console.log(2, mainRouteInformation(responseSearchApi))
             var responseMatch = dataBaseXApi(responseSearchDB,responseSearchApi)
             
             res.send(mainRouteInformation(responseMatch.slice(0,15)));
@@ -39,9 +33,7 @@ router.get('/genres', async (req,res,next)=>{
     try {
         let gamesByGenresApi = await requestApi2();
         let gamesByGenresDB = await SearchGameByGenreDB(genre)
-        
         let resp = [...gamesByGenresDB, ...gamesByGenresApi.filter((g)=>g.genres.includes(genre))]
-        console.log(resp)
         res.json([...gamesByGenresDB, ...gamesByGenresApi.filter((g)=>g.genres.includes(genre))])
     } catch (error) {
         next(error)

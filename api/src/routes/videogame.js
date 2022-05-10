@@ -32,14 +32,6 @@ router.post('/',async (req,res,next)=>{
             rating,
             platforms
         })
-        // let genresMatch = await Genres.findAll(
-        //     {
-        //         where: {
-        //             name: genres
-        //         }
-        //     }
-        // )
-
         videogameCreate.addGenres(genres)
 
         res.json(videogameCreate.toJSON());

@@ -76,7 +76,6 @@ async function SearchNameDB(name){
                 }
             ]
     })
-    console.log(3, gameMatchDB)
     return gameMatchDB;
 }
 
@@ -89,7 +88,6 @@ async function SearchGameByGenreDB(name){
             }
         ]
     })
-    console.log(gameByGenreDB)
     return gameByGenreDB;
 }
 
@@ -191,14 +189,6 @@ async function requestApi2(){
             rating: d.rating
         }
     })
-    // console.log(fin)
-    /* for(let i=0; i < datos.length; i++){
-        filtros = {name: datos[i].name}
-    } */
-    // console.log(datos.flat(2))
-    // console.time('Inicio')
-    // console.log(data.flat(2))
-    // console.timeEnd('Inicio')
     return fin
 }
 

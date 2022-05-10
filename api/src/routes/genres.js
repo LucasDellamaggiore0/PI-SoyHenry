@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const {Genres, Videogame} = require('../db')
 const {requestGenresApi,requestGenresDB, genresInfo} = require('./functions')
-// https://api.rawg.io/api/genres?key=${API_KEY}
+
 
 
 router.get('/', async(req,res,next)=>{
