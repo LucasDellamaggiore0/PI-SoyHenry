@@ -288,8 +288,14 @@
         margin-bottom: 3rem;
         margin-top: 1rem;
     }
-    .game__details--img{
-        width: 70%;
+    .game__details--img--container{
+        width: 60%;
+        display: flex;
+        justify-content: center;
+        .game__details--img{
+            width: 90%;
+            margin-bottom: 2rem;
+        }
     }
     .game__details--description--container{
         width: 70%;

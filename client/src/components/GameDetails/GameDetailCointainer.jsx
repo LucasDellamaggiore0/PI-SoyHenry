@@ -22,7 +22,7 @@ const GameDetailContainer = () =>{
         return(
             <>
                 <h2 className='game__details--title'>{game[0]?.name}</h2>
-                <div className='game__details--img'>
+                <div className='game__details--img--container'>
                     <img className="game__details--img" src={game[0]?.img} alt="img not found" />
                 </div>
                 <section className='game__details--description--container'>
