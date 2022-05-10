@@ -28,7 +28,7 @@ const GameContainer = () => {
     setCurrentPage(1);
   }, [games]);
 
-  if (loading) {
+  if(loading) {
     return (
       <div className="loader-content">
         <h1 className="loader-title">Cargando...</h1>;

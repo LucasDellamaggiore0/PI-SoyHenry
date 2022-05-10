@@ -7,7 +7,9 @@ export default function Filters(){
     const dispatch = useDispatch();
     const {genres} = useSelector((store)=> store)
     useEffect(()=>{
-        dispatch(getGenres())
+        if(genres.length === 0){
+            dispatch(getGenres())
+        }
     },[])
 
 

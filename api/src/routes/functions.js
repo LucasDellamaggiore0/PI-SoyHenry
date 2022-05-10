@@ -121,7 +121,7 @@ function gameDetails(gameDetail){
                 id: d.id,
                 name: d.name,
                 img: d.background_image,
-                description: d.description,
+                description: d.description_raw,
                 released: d.released,
                 rating: d.rating,
                 platforms: d.platforms.map(p=>{

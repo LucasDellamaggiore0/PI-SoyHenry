@@ -1,9 +1,9 @@
 import React from "react";
 import GameDetailContainer from './GameDetailCointainer'
-export default function Details(props){
+export default function Details(){
     return(
-        <div className="games__container--details">
+        <section className="games__container--details">
             <GameDetailContainer/>
-        </div>
+        </section>
     )
 }
