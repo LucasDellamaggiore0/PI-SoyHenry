@@ -127,7 +127,10 @@ export default function NewGame(){
                             })}
                         </select>
                         <ul>
-                            <li className="option__newGame--select">{gameInput.genres.map(g => {return g + ','})}</li>
+                            {gameInput.genres?.map(g => {let gen = genres?.find(e => e.id == g)
+                                    return <li className="option__newGame--select">{gen?.name}</li>
+                            })}
+                            
                         </ul>
                     </section>
                     <section className="select__newGame--platforms">

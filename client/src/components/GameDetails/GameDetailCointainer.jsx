@@ -44,7 +44,7 @@ const GameDetailContainer = () =>{
                     </div>
                     <div className='detail__released--container'>
                         <p className='detail__released--title'>Released</p>
-                        <p>{game[0]?.released}</p>
+                        <p>{game[0]?.released.slice(0,10)}</p>
                     </div>
                     <div className='detail__rating--container'>
                         <p className='detail__rating--title'>Rating</p>
