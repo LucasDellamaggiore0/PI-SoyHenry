@@ -7,7 +7,7 @@ const GamesMap = ({ currentPosts }) => {
             {
             currentPosts.length > 0 ? 
             currentPosts.map((games) => {
-                return <GameCard id={games.id} name={games.name} img={games.img} genres={games.genres} />
+                return <GameCard key={games.id} id={games.id} name={games.name} img={games.img} genres={games.genres} />
             }): <h1 className="alert--msg">No se encontraron juegos</h1>}
         </>
     )

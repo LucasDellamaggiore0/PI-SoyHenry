@@ -8,6 +8,7 @@ export const ORDER_BY_NAME = 'ORDER_BY_NAME'
 export const ORDER_BY_RATING = 'ORDER_BY_RATING'
 export const FILTER_GENRES = 'FILTER_GENRES'
 export const LOADING = 'LOADING'
+export const CHANGE_PAGE = 'CHANGE_PAGE'
 
 export const getAllGames = () =>async dispatch =>{
     const response = await fetch('http://localhost:3001/videogames')
@@ -28,7 +29,7 @@ export const getGameTitle = (title) => async dispatch =>{
 export const getGameById = (id) => async dispatch =>{
     let r = await fetch(`http://localhost:3001/videogame/${id}`)
     let gameId = await r.json()
-    return dispatch({type: GET_GAME_ID, payload: gameId})
+    return dispatch({type: GET_GAME_ID, payload: gameId, loader:false})
 }
 
 export const getGenres = () => async dispatch =>{
@@ -48,17 +49,17 @@ export const createGame = (values) => {
     }
 }
 
-export const orderByName = (games)=>{
+export const orderByName = (name)=>{
     return{
         type: ORDER_BY_NAME,
-        payload: games
+        payload: name
     }
 }
 
-export const orderByRating = (games)=>{
+export const orderByRating = (rating)=>{
     return{
         type: ORDER_BY_RATING,
-        payload: games
+        payload: rating
     }
 }
 
@@ -86,4 +87,8 @@ export const reset = ()=>{
 
 export const setLoading = ()=>{
     return {type: LOADING, payload: true}
+}
+
+export const changeCurrentPage = (page)=>{
+    return {type: CHANGE_PAGE, payload: page}
 }

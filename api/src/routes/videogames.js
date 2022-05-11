@@ -33,7 +33,6 @@ router.get('/genres', async (req,res,next)=>{
     try {
         let gamesByGenresApi = await requestApi2();
         let gamesByGenresDB = await SearchGameByGenreDB(genre)
-        let resp = [...gamesByGenresDB, ...gamesByGenresApi.filter((g)=>g.genres.includes(genre))]
         res.json([...gamesByGenresDB, ...gamesByGenresApi.filter((g)=>g.genres.includes(genre))])
     } catch (error) {
         next(error)

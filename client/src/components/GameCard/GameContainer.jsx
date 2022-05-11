@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getAllGames } from "../../redux/actions/index";
@@ -9,24 +9,17 @@ import '../../scss/_home.scss'
 import Orders from "../Filters/Orders";
 
 const GameContainer = () => {
-  const { games, loading } = useSelector((store) => store);
-  const [posts, setPosts] = useState(games);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(15);
+  const { games, loading, currentPage  } = useSelector((store) => store);
+  const postsPerPage = 15;
   const dispatch = useDispatch();
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = games.slice(indexOfFirstPost, indexOfLastPost);
 
   useEffect(() => {
     dispatch(getAllGames());
-  }, []);
-
-  useEffect(() => {
-    setPosts(games);
-    setCurrentPage(1);
-  }, [games]);
+  }, [dispatch]);
 
   if(loading) {
     return (
@@ -44,8 +37,8 @@ const GameContainer = () => {
         <section className="pagination--container">
           <Pagination
             postsPerPage={postsPerPage}
-            allPosts={posts.length}
-            setCurrentPage={setCurrentPage}
+            allPosts={games.length}
+            // setCurrentPage={setCurrentPage}
           />
         </section>
       </>

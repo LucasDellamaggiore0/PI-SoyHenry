@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createGame, getAllGames, getGenres } from "../../redux/actions";
+import { createGame, getGenres } from "../../redux/actions";
 import { Link } from "react-router-dom";
 
 export default function NewGame(){
@@ -57,7 +57,7 @@ export default function NewGame(){
 
     useEffect(()=>{
         dispatch(getGenres())
-    },[])
+    },[dispatch])
 
     function handleChange(e){
         e.preventDefault()
@@ -120,22 +120,22 @@ export default function NewGame(){
                         {error.date && (<span className="error__msg--form">{error.date}</span>)}
                     </section>
                     <section className="select__newGame--genres">
-                        <select name="genres" onClick={handleGenres}>
-                            <option selected="true" disabled="disabled">Genres...</option>
+                        <select name="genres" onChange={handleGenres}>
+                            <option value="">Genres...</option>
                             {genres.map((g)=>{
-                                return <option value={g.id}>{g.name}</option>
+                                return <option key={g.id} value={g.id}>{g.name}</option>
                             })}
                         </select>
                         <ul>
                             {gameInput.genres?.map(g => {let gen = genres?.find(e => e.id == g)
-                                    return <li className="option__newGame--select">{gen?.name}</li>
+                                    return <li key={g.id} className="option__newGame--select">{gen?.name}</li>
                             })}
                             
                         </ul>
                     </section>
                     <section className="select__newGame--platforms">
-                        <select name="platforms" onClick={handlePlatforms}>
-                            <option selected="true" disabled="disabled">Platforms...</option>
+                        <select name="platforms" onChange={handlePlatforms}>
+                            <option value="">Platforms...</option>
                             <option value="PC">PC</option>
                             <option value="PS5">PS5</option>
                             <option value="PS4">PS4</option>

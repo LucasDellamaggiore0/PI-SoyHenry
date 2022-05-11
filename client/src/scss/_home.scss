@@ -12,7 +12,7 @@
         grid-column: 1/2;
         display: flex;
         flex-direction: column;
-        justify-content: start;
+        justify-content: flex-start;
         max-width: 300px;
         height: auto;
         background-color: black;
@@ -92,7 +92,7 @@
             margin-right: 2rem;
             background-color: black;
             display: flex;
-            justify-content: end;
+            justify-content: flex-end;
             align-items: center;
             .searchbar--inpt{
                 width: 25rem;
@@ -148,9 +148,10 @@
             //! ORDERS
             .orders--container{
                 display: flex;
-                justify-content: start;
+                justify-content: flex-start;
                 align-items: center;
                 margin-top: 2rem;
+                margin-left: .2rem;
                 .orders--name__container{
                     margin-right: 2.8rem;
                     span{
@@ -203,19 +204,20 @@
                 }
                 //! CARD GAMES
                 .game--content{
-                    height: 400px;
+                    height: 290px;
                     width: 350px;
                     border: 1px solid black;
                     border-radius: .5rem;
-                    margin-top: 2rem;
-                    margin-right: 1rem;
+                    margin-top: 1.4rem;
+                    margin-right: 2rem;
                     background-color: #1F1F1F;
                     display: flex;
                     flex-direction: column;
                     transition: transform .2s;
+                    justify-content: space-around;
                     .game--content__img{
                         width: 100%;
-                        height: 500px;
+                        height: 200px;
                     }
                     .game--content__title{
                         color: #C6EF24;
@@ -227,13 +229,14 @@
                     .game--content__container{
                         display: flex;
                         justify-content: center;
-                        margin-top: 1rem;
+                        // margin-top: 1rem;
                         .game--content__text{
                             color: white;
                             font-family: 'Poppins', sans-serif;
-                            font-weight: 600;
+                            font-weight: 400;
                             text-align: center;
                             width: 100%;
+                            margin-bottom: .5rem;
                     }
                     }
                     
@@ -278,6 +281,24 @@
     align-items: center;
     background-color: #1F1F1F;
     min-height: 100vh;
+    }
+    .loader-content{
+        display: flex;
+            width: 100vw;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            .loader-title{
+                background-color: #1F1F1F;
+                width: 100%;
+                color: #A1FC2E;
+                text-align: center;
+                font-size: 48px;
+                font-family: 'Poppins', sans-serif;
+                font-weight: bold;
+                text-transform: uppercase;
+                margin-top: 10%;
+        }
     }
     .game__details--title{
         text-align: center;

@@ -10,7 +10,7 @@ export default function Filters(){
         if(genres.length === 0){
             dispatch(getGenres())
         }
-    },[])
+    },[dispatch, genres.length])
 
 
     function filterGenre(e){
@@ -44,7 +44,7 @@ export default function Filters(){
             <div className="filters--container">
                 <section className="filterByGenres"  name="filterGenre" onChange={filterGenre}>
                     <p className="filterTitle">Genres</p>
-                    {genres.map(g => <button value={g.name} onClick={filterGenre}>{g.name}</button>)}
+                    {genres.map(g => <button key={g.id} value={g.name} onClick={filterGenre}>{g.name}</button>)}
                     
                 </section>
                 <section className="filterByOrigin">
